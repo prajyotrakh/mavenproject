@@ -1,2 +1,2 @@
 practice of devops tool git
-git is open source platform independent..
+git is open source platform independent....
