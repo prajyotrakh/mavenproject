@@ -1,0 +1,45 @@
+pipeline{
+    agent any
+    stages{
+        stage('one'){
+            steps{
+                sh 'cat /etc/passwd'
+            }
+        }
+        stage(''){
+            steps{
+                sh 'cat /etc/group'
+            }
+        }
+        stage('git clone'){
+            steps{
+                git branch: 'main', url: 'https://github.com/prajyotrakh/maven-web-app.git'
+            }
+        }
+        stage('mvn compile'){
+            steps{
+                sh 'mvn compile'
+            }
+        }
+        stage('mvn test'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+        stage('mvn package'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+        stage('mvn deploy'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage("archieve artifacts"){
+            steps{
+                archiveArtifacts artifacts: 'pom.xml', followSymlinks: false
+            }
+        }
+    }
+}
